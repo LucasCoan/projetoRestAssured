@@ -6,7 +6,7 @@ public class RequestUsuarioUtils {
     public static UsuarioPojo AdicionarUsuario() {
         UsuarioPojo usuario = new UsuarioPojo();
         usuario.setNome("Lucas Coan Mazzuco");
-        usuario.setEmail("lukas1@gmail.com");
+        usuario.setEmail("LucasCoan@gmail.com");
         usuario.setPassword("123456");
         usuario.setAdministrador("true");
 
@@ -16,7 +16,7 @@ public class RequestUsuarioUtils {
     public static UsuarioPojo AdicionarUsuarioIsolado() {
         UsuarioPojo usuario = new UsuarioPojo();
         usuario.setNome("Lucas Coan Mazzuco");
-        usuario.setEmail("coan2@gmail.com");
+        usuario.setEmail("coan3@gmail.com");
         usuario.setPassword("123456");
         usuario.setAdministrador("true");
 

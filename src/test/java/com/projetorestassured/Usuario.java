@@ -37,7 +37,6 @@ public class Usuario {
 
     }
 
-    @Ignore
     @DisplayName("Realizando o Cadastro De Um Novo Usuário de Forma Isolada")
     @Test
     @Order(2)
@@ -61,19 +60,18 @@ public class Usuario {
     void testBuscarUmUsuarioEspecificoCadastrado() {
         given()
                 .contentType(ContentType.JSON)
-                .queryParam("_id", Id)
+                .queryParam("_Id", Id)
             .when()
                 .get("/usuarios")
             .then()
                 .log().all()
                     .assertThat()
                         .statusCode(200)
-                        .body("usuarios[0].nome", equalTo("lucas28@gmail.com"))
-                        .body("usuarios[0].email", equalTo("lucas28@gmail.com"))
-                        .body("usuarios[0].password", equalTo("123456"))
-                        .body("usuarios[0].administrador", equalTo("true"));
-
-        System.out.println(Id);
+                        .body("usuarios[0].nome", equalTo("Lucas Coan Mazzuco"))
+                        .body("usuarios[0].email", equalTo("lucascoan@qa.com"))
+                        .body("usuarios[0].password", equalTo("lucasteste"))
+                        .body("usuarios[0].administrador", equalTo("true"))
+                        .body("_id", equalTo(Id));
 
 
     }
@@ -91,13 +89,13 @@ public class Usuario {
                 .log().all()
                     .assertThat()
                         .statusCode(200)
-                        .body("nome", equalTo("lucas22@gmail.com"))
-                        .body("email", equalTo("lucas22@gmail.com"))
-                        .body("password", equalTo("123456"))
+                        .body("nome", equalTo("Lucas Coan Mazzuco"))
+                        .body("email", equalTo("lucascoan@qa.com"))
+                        .body("password", equalTo("lucasteste"))
                         .body("administrador", equalTo("true"))
-                        .body("_id", equalTo(Id));
+                        .body("_id", equalTo("BVRBQvLH2XLKd9R3"));
 
-        System.out.println(this.Id);
+        System.out.println(Id);
 
     }
 
@@ -116,6 +114,23 @@ public class Usuario {
                     .assertThat()
                       .statusCode(200)
                         .body("message", equalTo("Registro alterado com sucesso"));
+
+    }
+
+    @DisplayName("Efetuando a Deleção de um Usuário")
+    @Test
+    void testEfetuarADelecaoDeUmUsuario(){
+        given()
+                .contentType(ContentType.JSON)
+                .pathParam("_id", Id)
+                .then()
+                .when()
+                .delete()
+            .then()
+                .log().all()
+                    .assertThat()
+                        .statusCode(200)
+                        .body("message", equalTo("Registro excluído com sucesso"));
 
     }
 }
