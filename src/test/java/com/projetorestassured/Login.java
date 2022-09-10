@@ -30,4 +30,22 @@ public class Login {
         System.out.println(token);
     }
 
+    @DisplayName("Efetuando o Login")
+    @Test
+    void testEfetuandoLogin(){
+        given()
+                .contentType(ContentType.JSON)
+                .body(RequestLoginUtils.criarUsuarioLogin())
+                .when()
+                .post("/login")
+                .then()
+                .log().all()
+                        .assertThat()
+                                .statusCode(200)
+                                        .body("message", equalTo("Login realizado com sucesso"));
+
+
+        System.out.println(token);
+    }
+
 }
