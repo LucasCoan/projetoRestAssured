@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class Produtos {
-    public String token;
+    private static String token;
 
     @BeforeEach
     void setup(){
@@ -29,6 +29,10 @@ public class Produtos {
                 .path("authorization");
 
         System.out.println(token);
+    }
+
+    public static String getToken(){
+        return token;
     }
 
     @DisplayName("Efetuar Cadastro de Um Produto")

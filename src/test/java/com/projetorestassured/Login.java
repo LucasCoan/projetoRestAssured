@@ -3,6 +3,7 @@ package com.projetorestassured;
 import com.projetorestassured.utils.request.RequestLoginUtils;
 import com.projetorestassured.utils.request.RequestUsuarioUtils;
 import io.restassured.http.ContentType;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

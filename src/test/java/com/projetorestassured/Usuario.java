@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Usuario {
-    public String Id;
+    private static String Id;
 
     @BeforeEach
     void setup() {
@@ -37,6 +37,10 @@ public class Usuario {
 
     }
 
+    public static String getId(){
+        return Id;
+    }
+
     @DisplayName("Realizando o Cadastro De Um Novo Usuário de Forma Isolada")
     @Test
     @Order(2)
@@ -60,19 +64,19 @@ public class Usuario {
     void testBuscarUmUsuarioEspecificoCadastrado() {
         given()
                 .contentType(ContentType.JSON)
-                .queryParam("_Id", Id)
+                .queryParam("_id", Id)
             .when()
                 .get("/usuarios")
             .then()
                 .log().all()
                     .assertThat()
                         .statusCode(200)
-                        .body("usuarios[0].nome", equalTo("Lucas Coan Mazzuco"))
-                        .body("usuarios[0].email", equalTo("lucascoan@qa.com"))
-                        .body("usuarios[0].password", equalTo("lucasteste"))
-                        .body("usuarios[0].administrador", equalTo("true"))
-                        .body("_id", equalTo(Id));
+                        .body("usuarios[0].nome", equalTo("lucas3@gmail.com"))
+                        .body("usuarios[0].email", equalTo("lucas3@gmail.com"))
+                        .body("usuarios[0].password", equalTo("123456"))
+                        .body("usuarios[0].administrador", equalTo("true"));
 
+        System.out.println(Id);
 
     }
 
@@ -89,17 +93,17 @@ public class Usuario {
                 .log().all()
                     .assertThat()
                         .statusCode(200)
-                        .body("nome", equalTo("Lucas Coan Mazzuco"))
-                        .body("email", equalTo("lucascoan@qa.com"))
-                        .body("password", equalTo("lucasteste"))
+                        .body("nome", equalTo("lucas3@gmail.com"))
+                        .body("email", equalTo("lucas3@gmail.com"))
+                        .body("password", equalTo("123456"))
                         .body("administrador", equalTo("true"))
-                        .body("_id", equalTo("BVRBQvLH2XLKd9R3"));
+                        .body("_id", equalTo(Id));
 
         System.out.println(Id);
 
     }
 
-    @DisplayName("Efetuando Alteração Em Usuários Já Cadastrados")
+    @DisplayName("Efetuando Alteração No Usuário Cadastrado")
     @Test
     @Order(5)
     void testEfetuandoAlteracoesEmUsuario(){
@@ -115,6 +119,7 @@ public class Usuario {
                       .statusCode(200)
                         .body("message", equalTo("Registro alterado com sucesso"));
 
+        System.out.println(Id);
     }
 
     @DisplayName("Efetuando a Deleção de um Usuário")
@@ -123,9 +128,8 @@ public class Usuario {
         given()
                 .contentType(ContentType.JSON)
                 .pathParam("_id", Id)
-                .then()
                 .when()
-                .delete()
+                .delete("/usuarios/{_id}")
             .then()
                 .log().all()
                     .assertThat()
