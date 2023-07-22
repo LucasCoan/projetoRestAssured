@@ -12,6 +12,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class Produtos {
+
     private static String token;
 
     @BeforeEach
@@ -21,12 +22,12 @@ public class Produtos {
         this.token = given()
                 .contentType(ContentType.JSON)
                 .body(RequestLoginUtils.criarUsuarioLogin())
-                .when()
+            .when()
                 .post("/login")
-                .then()
+            .then()
                 .log().all()
-                .extract()
-                .path("authorization");
+                    .extract()
+                        .path("authorization");
 
         System.out.println(token);
     }
