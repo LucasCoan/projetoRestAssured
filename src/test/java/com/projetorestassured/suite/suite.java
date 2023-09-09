@@ -1,18 +1,17 @@
 package com.projetorestassured.suite;
 
-import com.projetorestassured.Login;
-import com.projetorestassured.Usuario;
-import org.junit.platform.suite.api.SelectClasses;
-import org.junit.platform.suite.api.SuiteDisplayName;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
-import org.junit.platform.runner.JUnitPlatform;
 
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        plugin = "pretty",
+        monochrome = true,
+        snippets = CucumberOptions.SnippetType.CAMELCASE,
+        tags = "@serveRest"
+)
 
-@RunWith(JUnitPlatform.class)
-@SuiteDisplayName("teste")
-@SelectClasses({
-        Usuario.class,
-        Login.class})
+public class suite {
 
-class suite {
 }

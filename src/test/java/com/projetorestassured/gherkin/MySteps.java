@@ -1,33 +1,30 @@
 package com.projetorestassured.gherkin;
 
-import com.projetorestassured.model.ModelExemple;
+import com.projetorestassured.model.LoginModel;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
-
-import java.io.IOException;
 
 public class MySteps {
 
 
-    private final ModelExemple model = new ModelExemple();
+    private final LoginModel login = new LoginModel();
 
     @Given("que o usuario efetua o login enviando o {string}")
-    public void que_o_usuario_efetua_o_login_enviando_o(String arg1) {
-        model.testEfetuandoLogin();
+    public void queOUsuarioEfetuaOLoginEnviandoO(String payload) {
+        login.testEfetuandoLogin();
     }
 
 
     @Then("deve receber um status code {int}")
-    public void deve_receber_um_status_code(Integer statusCode) {
-        Assert.assertEquals(statusCode, statusCode);
+    public void deveReceberUmStatusCode(Integer statusCode) {
+        Assert.assertEquals(statusCode, login.getStatusCode());
 
     }
 
-    @Then("o campo authorization {string} nao pode ser nulo")
-    public void o_campo_authorization_nao_pode_ser_nulo(String arg1) throws Throwable {
+    @And("o campo authorization authorization nao pode ser nulo")
+    public void oCampoAuthorizationAuthorizationNaoPodeSerNulo() {
+        login.validarCampoAuthorizationNaoNulo();
     }
-
 }
